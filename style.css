@@ -1,0 +1,564 @@
+/* Paleta de colores */
+:root {
+  --primary-color: #2f3e57;
+  --secondary-color: #f59a23;
+  --background-color: #f9fafc;
+  --card-background: #ffffff;
+  --text-color: #2f3e57;
+  --border-radius: 6px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Aumentamos ligeramente el tamaño base para mejorar la legibilidad */
+  font-size: 14px;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.3;
+  /* Evitar scroll vertical en la página general */
+  overflow: hidden;
+}
+
+/* Cabecera compacta */
+.app-header {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 1.4rem;
+  margin-bottom: 2px;
+}
+
+.app-header p {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* Contenedor general (ventana) */
+.window-card {
+  width: 95%;
+  max-width: 780px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Filas */
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+/* Columnas dentro de filas */
+.row .col {
+  flex: 1;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Títulos dentro de columnas */
+.row .col h2 {
+  color: var(--primary-color);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+/* Campos en filas */
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+}
+
+.field-row label {
+  width: 80px;
+  font-weight: 600;
+}
+
+.field-row input,
+.field-row select {
+  flex: 1;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* Data items */
+.data-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.data-item span {
+  width: 110px;
+  font-weight: 600;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input-group input[type="radio"] {
+  margin-right: 2px;
+}
+
+.input-group label {
+  font-size: 0.8rem;
+  margin-right: 6px;
+}
+
+/* Filtros Selectivos */
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.filter-item span {
+  display: flex;
+  align-items: center;
+}
+
+.filter-item span:nth-of-type(2) {
+  width: 100px; /* ancho del nombre del filtro para acomodar texto más grande */
+  font-weight: 600;
+}
+
+.selection-summary {
+  margin-left: auto;
+  margin-right: 6px;
+  color: var(--primary-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.mini-button {
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Emoji */
+.emoji {
+  /* Ajuste de tamaño y separación del emoji, utilizando su color original */
+  font-size: 1rem;
+  display: inline-block;
+  margin-right: 6px;
+  line-height: 1;
+  /* Aplicamos filtro a los emojis para desaturarlos y que armonicen con el diseño */
+  filter: grayscale(100%) brightness(1.4);
+}
+
+/* Filtros por Rango
+   La altura y el scroll se gestionan más abajo para asegurar que
+   los elementos se ajusten al espacio disponible dentro de la ventana. */
+.range-scroll {
+  /* Intencionadamente vacío */
+}
+
+.range-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+}
+
+.range-item span {
+  width: 70px;
+  font-weight: 600;
+}
+
+.range-item input {
+  flex: 1;
+  /* Permitimos que los inputs se reduzcan en ancho para evitar desbordamientos */
+  min-width: 0;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* Aseguramos que la columna de rangos utilice toda la altura disponible 
+   y su contenido se estire con scroll cuando sea necesario */
+/* Estructura para los filtros por rango divididos en columnas */
+.range-col {
+  display: flex;
+  flex-direction: column;
+  /* Permitimos que la columna se reduzca horizontalmente dentro de la fila sin desbordarse */
+  min-width: 0;
+}
+
+/* Contenedor de dos columnas para los filtros por rango */
+/* .range-grid* y columnas asociadas eliminadas al volver a una sola columna de rangos */
+
+/* Botones de acción */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.button-group.compact button {
+  flex: 1;
+}
+
+.button-group.vertical {
+  flex-direction: column;
+}
+
+/* En la columna de salida los botones ocupan todo el ancho y están apilados */
+.output-col .button-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.output-col .icon-button {
+  width: 100%;
+  justify-content: center;
+  flex: 1;
+  /* Hacemos que cada botón ocupe la altura disponible dentro del grupo */
+  height: 100%;
+}
+
+/* La sección de formato del panel inferior ocupa todo el alto con sus botones */
+.config-col .button-group.vertical {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.config-col .button-group.vertical button {
+  flex: 1;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.icon-button:hover {
+  background-color: #e5891f;
+}
+
+.secondary {
+  background-color: #e0e6f1;
+  color: var(--primary-color);
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.secondary:hover {
+  background-color: #d5dceb;
+}
+
+.primary {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.primary:hover {
+  background-color: #e5891f;
+}
+
+.checkbox-row {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.checkbox-row input {
+  margin-right: 2px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Pie de página */
+.app-footer {
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  font-size: 0.7rem;
+  margin-top: 8px;
+}
+
+/* Modal (igual que antes) */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Estilos de la ventana tipo Windows */
+.app-window {
+  width: 587px;
+  height: 548px;
+  margin: 20px auto;
+  background-color: var(--card-background);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Barra de título de la ventana */
+.window-title-bar {
+  height: 28px;
+  background-color: var(--primary-color);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 0.85rem;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  user-select: none;
+}
+
+.window-title {
+  font-weight: 600;
+}
+
+/* Controles de la ventana (minimizar, maximizar, cerrar) */
+.window-controls {
+  display: flex;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.window-controls .control {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+  line-height: 1;
+}
+
+.window-controls .control:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.window-controls .close:hover {
+  background-color: #d9534f;
+}
+
+/* Área de contenido de la ventana */
+.window-content {
+  flex: 1;
+  overflow: hidden;
+  padding: 4px;
+  display: flex;
+}
+
+/* Ajustar el contenedor principal al nuevo tamaño de la ventana */
+.window-card {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Ajustes de filas y columnas para ahorrar espacio */
+.row {
+  display: flex;
+  gap: 6px;
+}
+
+.row .col {
+  flex: 1;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  /* Añadimos un borde más visible para diferenciar las secciones */
+  border: 1px solid #b5c0d8;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Reducir alto del contenedor de rangos para que quepa en la ventana */
+.range-scroll {
+  /* Permitimos que la lista de rangos crezca para igualar la altura de los filtros selectivos.
+     El elemento padre (.range-col) gestionará la altura disponible. */
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  /* También permitimos que la lista se reduzca en anchura dentro de su contenedor */
+  min-width: 0;
+}
+
+/* Ajustes para tamaños de fuentes más pequeños en botones y textos */
+.row .col h2 {
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+}
+
+.field-row,
+.data-item,
+.filter-item,
+.range-item,
+.checkbox-row {
+  font-size: 0.75rem;
+}
+
+.icon-button {
+  font-size: 0.75rem;
+  padding: 2px 4px;
+}
+
+.secondary,
+.primary {
+  font-size: 0.7rem;
+  padding: 2px 4px;
+}
+
+.modal {
+  background: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  width: 560px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-body {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-list h4 {
+  margin-bottom: 2px;
+  font-size: 0.85rem;
+  color: var(--primary-color);
+}
+
+.modal-list select {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px;
+  font-size: 0.8rem;
+}
+
+.modal-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+}
+
+.modal-controls button {
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal-controls button:hover {
+  background-color: #e5891f;
+}
+
+.modal-options {
+  display: flex;
+  gap: 12px;
+  font-size: 0.75rem;
+}
+
+.modal-options label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}

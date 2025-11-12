@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Comprobantes de Ventas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Ventana al estilo Windows -->
+    <div class="app-window">
+      <div class="window-title-bar">
+        <span class="window-title">Listado de Comprobantes de Ventas</span>
+        <div class="window-controls">
+          <span class="control minimize" title="Minimizar">−</span>
+          <span class="control maximize" title="Maximizar">□</span>
+          <span class="control close" title="Cerrar">×</span>
+        </div>
+      </div>
+      <div class="window-content">
+        <!-- Contenido principal -->
+        <div class="window-card">
+          <!-- Primera fila: Formato y Datos -->
+          <div class="row row1">
+            <!-- Columna Formato -->
+            <div class="col format-col">
+              <h2>Formato</h2>
+              <div class="field-row">
+                <label for="titulo">Título</label>
+                <select id="titulo">
+                  <option value="fc-rto-nc-nd">LISTADOS FC - RTO - N/C - N/D</option>
+                  <option value="fc-rto-nc">LISTADOS FC - RTO - N/C</option>
+                  <option value="fc-nc-nd">LISTADOS FC - N/C - N/D</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <label for="orden">Orden</label>
+                <select id="orden">
+                  <option value="razon-social">Razón social</option>
+                  <option value="fecha">Fecha</option>
+                  <option value="numero">Número</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <label for="formato">Formato</label>
+                <input type="number" id="formato" min="1" max="5" value="1" />
+              </div>
+            </div>
+            <!-- Columna Datos -->
+            <div class="col data-col">
+              <h2>Datos</h2>
+              <div class="data-item">
+                <span>Solo anulados</span>
+                <div class="input-group">
+                  <input type="radio" id="anulados-no" name="solo-anulados" value="no" checked />
+                  <label for="anulados-no">No</label>
+                  <input type="radio" id="anulados-si" name="solo-anulados" value="si" />
+                  <label for="anulados-si">Sí</label>
+                </div>
+              </div>
+              <div class="data-item">
+                <span>Cotización histórica</span>
+                <div class="input-group">
+                  <input type="radio" id="coth-no" name="cot-historica" value="no" />
+                  <label for="coth-no">No</label>
+                  <input type="radio" id="coth-si" name="cot-historica" value="si" checked />
+                  <label for="coth-si">Sí</label>
+                </div>
+              </div>
+              <div class="data-item">
+                <span>Moneda presentación</span>
+                <select id="moneda-presentacion">
+                  <option value="pesos">Pesos</option>
+                  <option value="dolares">Dólares</option>
+                  <option value="euros">Euros</option>
+                </select>
+              </div>
+              <div class="data-item">
+                <span>Solo pendientes a de</span>
+                <select id="solo-pendientes">
+                  <option value="no">No</option>
+                  <option value="si">Sí</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!-- Segunda fila: Filtros Selectivos y Filtros por Rango -->
+          <div class="row row2">
+            <!-- Filtros Selectivos -->
+            <div class="col selective-col">
+              <h2>Filtros Selectivos</h2>
+              <div class="filter-item">
+                <span class="emoji" title="Zonas">🌍</span>
+                <span>Zonas</span>
+                <span id="zonas-summary" class="selection-summary">Todas</span>
+                <button class="mini-button secondary" data-filter="zonas">Seleccionar</button>
+              </div>
+              <div class="filter-item">
+                <span class="emoji" title="Comprobantes">📄</span>
+                <span>Comprobantes</span>
+                <span id="comprobantes-summary" class="selection-summary">Todos</span>
+                <button class="mini-button secondary" data-filter="comprobantes">Seleccionar</button>
+              </div>
+              <div class="filter-item">
+                <span class="emoji" title="Vendedores">🧑‍💼</span>
+                <span>Vendedores</span>
+                <span id="vendedores-summary" class="selection-summary">Todos</span>
+                <button class="mini-button secondary" data-filter="vendedores">Seleccionar</button>
+              </div>
+              <div class="filter-item">
+                <span class="emoji" title="Clientes">👥</span>
+                <span>Clientes</span>
+                <span id="clientes-summary" class="selection-summary">Todos</span>
+                <button class="mini-button secondary" data-filter="clientes">Seleccionar</button>
+              </div>
+              <div class="filter-item">
+                <span class="emoji" title="Sucursales">🏢</span>
+                <span>Sucursales</span>
+                <span id="sucursales-summary" class="selection-summary">Todas</span>
+                <button class="mini-button secondary" data-filter="sucursales">Seleccionar</button>
+              </div>
+              <div class="filter-item">
+                <span class="emoji" title="Condiciones de pago">💳</span>
+                <span>Condiciones de pago</span>
+                <span id="condiciones-summary" class="selection-summary">Todas</span>
+                <button class="mini-button secondary" data-filter="condiciones">Seleccionar</button>
+              </div>
+              <div class="filter-item">
+                <span class="emoji" title="Categorías">🗂</span>
+                <span>Categorías</span>
+                <span id="categorias-summary" class="selection-summary">Todas</span>
+                <button class="mini-button secondary" data-filter="categorias">Seleccionar</button>
+              </div>
+            </div>
+            <!-- Filtros por Rango -->
+            <div class="col range-col">
+              <h2>Filtros por Rango</h2>
+              <div class="range-scroll">
+                <div class="range-item">
+                  <span>Clientes</span>
+                  <input type="text" placeholder="Primero" value="0001" />
+                  <input type="text" placeholder="Último" value="9999" />
+                </div>
+                <div class="range-item">
+                  <span>Fechas</span>
+                  <input type="date" value="2025-01-01" />
+                  <input type="date" value="2025-12-31" />
+                </div>
+                <div class="range-item">
+                  <span>Bonificación 1</span>
+                  <input type="number" min="0" max="100" value="0" />
+                  <input type="number" min="0" max="100" value="100" />
+                </div>
+                <div class="range-item">
+                  <span>Bonificación 2</span>
+                  <input type="number" min="0" max="100" value="0" />
+                  <input type="number" min="0" max="100" value="100" />
+                </div>
+                <div class="range-item">
+                  <span>Fecha Proceso</span>
+                  <input type="date" value="2025-01-01" />
+                  <input type="date" value="2025-12-31" />
+                </div>
+                <div class="range-item">
+                  <span>Categorías</span>
+                  <input type="text" placeholder="Primero" value="A" />
+                  <input type="text" placeholder="Último" value="Z" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tercera fila: Salida, Impresora y Configuración -->
+          <div class="row row3">
+            <!-- Seleccionar Salida -->
+            <div class="col output-col">
+              <h2>Salida</h2>
+              <div class="button-group">
+                <button class="icon-button" id="preview-button" title="Vista previa">🖥 <span>Vista previa</span></button>
+                <button class="icon-button" id="pdf-button" title="Imprimir o PDF">🖨 <span>PDF/Impresora</span></button>
+                <button class="icon-button" id="install-button" title="Imprimir Excel">📦 <span>Excel</span></button>
+              </div>
+            </div>
+            <!-- Seleccionar Impresora -->
+            <div class="col printer-col">
+              <h2>Impresora</h2>
+              <div class="field-row">
+                <label for="printer">Dispositivo</label>
+                <select id="printer">
+                  <option value="microsoft-print">Microsoft Print to PDF</option>
+                  <option value="hp-laserjet">HP LaserJet Pro</option>
+                  <option value="epson">Epson EcoTank</option>
+                </select>
+              </div>
+              <div class="field-row">
+                <label for="copies">Copias</label>
+                <input type="number" id="copies" min="1" max="10" value="1" />
+              </div>
+              <div class="checkbox-row">
+                <label><input type="checkbox" id="separator-checkbox" checked /> Sep. miles</label>
+              </div>
+              <div class="checkbox-row">
+                <label><input type="checkbox" id="send-email" /> Enviar por email</label>
+              </div>
+              <div class="field-row hidden" id="email-container">
+                <label for="email">Correo</label>
+                <input type="email" id="email" placeholder="usuario@dominio.com" />
+              </div>
+              <div class="button-group compact">
+                <button class="secondary" id="configure-printer-button">Config.</button>
+                <button class="primary" id="print-button">Imprimir</button>
+              </div>
+            </div>
+            <!-- Configuración de Formato -->
+            <div class="col config-col">
+              <h2>Formato</h2>
+              <div class="button-group vertical">
+                <button class="secondary" id="reporte-button">Reporte...</button>
+                <button class="secondary" id="columnas-button">Columnas...</button>
+                <button class="secondary" id="preliminar-button">Preliminar...</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para selección múltiple -->
+    <div id="modal-overlay">
+      <div class="modal" id="modal-content">
+        <h3 id="modal-title">Seleccionar</h3>
+        <div class="modal-body">
+          <div class="modal-list">
+            <h4>Datos disponibles</h4>
+            <select id="available-list" multiple size="8"></select>
+          </div>
+          <div class="modal-controls">
+            <button id="add-selected">&gt;</button>
+            <button id="remove-selected">&lt;</button>
+            <button id="add-all">&gt;&gt;</button>
+            <button id="remove-all">&lt;&lt;</button>
+          </div>
+          <div class="modal-list">
+            <h4>Datos seleccionados</h4>
+            <select id="selected-list" multiple size="8"></select>
+          </div>
+        </div>
+        <div class="modal-options">
+          <label><input type="checkbox" id="guardar-seleccion" /> Guarda selección</label>
+          <label><input type="checkbox" id="todos-formatos" /> Todos los formatos</label>
+        </div>
+        <div class="modal-buttons">
+          <button id="modal-aceptar" class="primary">Aceptar</button>
+          <button id="modal-cancelar" class="secondary">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script principal -->
+    <script src="script.js"></script>
+  </body>
+</html>
