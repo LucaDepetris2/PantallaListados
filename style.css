@@ -2,8 +2,10 @@
 :root {
   --primary-color: #2f3e57;
   --secondary-color: #f59a23;
-  --background-color: #f9fafc;
-  --card-background: #ffffff;
+  /* Ajustamos el fondo general y el de las tarjetas para utilizar más tonos azules
+     y reducir la presencia de blanco. */
+  --background-color: #e7edf8;
+  --card-background: #f3f6fc;
   --text-color: #2f3e57;
   --border-radius: 6px;
 }
