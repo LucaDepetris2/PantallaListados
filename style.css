@@ -1,13 +1,38 @@
-/* Paleta de colores */
+/* Modern CSS Reset & Variables */
 :root {
-  --primary-color: #2f3e57;
-  --secondary-color: #f59a23;
-  /* Ajustamos el fondo general y el de las tarjetas para utilizar más tonos azules
-     y reducir la presencia de blanco. */
-  --background-color: #e7edf8;
-  --card-background: #f3f6fc;
-  --text-color: #2f3e57;
-  --border-radius: 6px;
+  /* Palette - Modernized Deep Blues & Vibrant Accents */
+  --primary-color: #3b82f6;
+  /* Modern Blue */
+  --primary-dark: #2563eb;
+  --primary-light: #eff6ff;
+
+  --secondary-color: #64748b;
+  /* Slate */
+  --accent-color: #f59e0b;
+  /* Amber/Orange from original */
+
+  --bg-color: #f1f5f9;
+  /* Slate 100 */
+  --card-bg: #ffffff;
+
+  --text-main: #1e293b;
+  /* Slate 800 */
+  --text-muted: #64748b;
+  /* Slate 500 */
+
+  --border-color: #e2e8f0;
+  /* Slate 200 */
+  --border-focus: #3b82f6;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -16,551 +41,655 @@
   padding: 0;
 }
 
-html {
-  /* Aumentamos ligeramente el tamaño base para mejorar la legibilidad */
-  font-size: 14px;
-}
-
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.3;
-  /* Evitar scroll vertical en la página general */
-  overflow: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-/* Cabecera compacta */
+/* App Container */
+.app-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header */
 .app-header {
-  background-color: var(--primary-color);
-  color: #fff;
-  padding: 12px;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .app-header h1 {
-  font-size: 1.4rem;
-  margin-bottom: 2px;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.025em;
 }
 
-.app-header p {
-  font-size: 0.7rem;
-  opacity: 0.8;
-}
-
-/* Contenedor general (ventana) */
-.window-card {
-  width: 95%;
-  max-width: 780px;
-  margin: 10px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* Filas */
-.row {
-  display: flex;
-  gap: 8px;
-}
-
-/* Columnas dentro de filas */
-.row .col {
-  flex: 1;
-  background-color: var(--card-background);
-  border-radius: var(--border-radius);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Títulos dentro de columnas */
-.row .col h2 {
-  color: var(--primary-color);
-  font-size: 0.95rem;
-  margin-bottom: 4px;
-}
-
-/* Campos en filas */
-.field-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 4px;
-  font-size: 0.8rem;
-}
-
-.field-row label {
-  width: 80px;
-  font-weight: 600;
-}
-
-.field-row input,
-.field-row select {
-  flex: 1;
-  padding: 2px 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
-
-/* Data items */
-.data-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.8rem;
-  margin-bottom: 4px;
-}
-
-.data-item span {
-  width: 110px;
-  font-weight: 600;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.input-group input[type="radio"] {
-  margin-right: 2px;
-}
-
-.input-group label {
-  font-size: 0.8rem;
-  margin-right: 6px;
-}
-
-/* Filtros Selectivos */
-.filter-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  margin-bottom: 6px;
-}
-
-.filter-item span {
-  display: flex;
-  align-items: center;
-}
-
-.filter-item span:nth-of-type(2) {
-  width: 100px; /* ancho del nombre del filtro para acomodar texto más grande */
-  font-weight: 600;
-}
-
-.selection-summary {
-  margin-left: auto;
-  margin-right: 6px;
-  color: var(--primary-color);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.mini-button {
-  padding: 2px 6px;
-  font-size: 0.7rem;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Emoji */
-.emoji {
-  /* Ajuste de tamaño y separación del emoji, utilizando su color original */
+.app-header .subtitle {
+  color: var(--text-muted);
   font-size: 1rem;
-  display: inline-block;
-  margin-right: 6px;
-  line-height: 1;
-  /* Aplicamos filtro a los emojis para desaturarlos y que armonicen con el diseño */
-  filter: grayscale(100%) brightness(1.4);
 }
 
-/* Filtros por Rango
-   La altura y el scroll se gestionan más abajo para asegurar que
-   los elementos se ajusten al espacio disponible dentro de la ventana. */
-.range-scroll {
-  /* Intencionadamente vacío */
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.range-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 4px;
-  font-size: 0.8rem;
+.card:hover {
+  box-shadow: var(--shadow-lg);
 }
 
-.range-item span {
-  width: 70px;
+.card-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #f8fafc;
+}
+
+.card-header h2 {
+  font-size: 1.125rem;
   font-weight: 600;
-}
-
-.range-item input {
-  flex: 1;
-  /* Permitimos que los inputs se reduzcan en ancho para evitar desbordamientos */
-  min-width: 0;
-  padding: 2px 4px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
-
-/* Aseguramos que la columna de rangos utilice toda la altura disponible 
-   y su contenido se estire con scroll cuando sea necesario */
-/* Estructura para los filtros por rango divididos en columnas */
-.range-col {
+  color: var(--text-main);
   display: flex;
-  flex-direction: column;
-  /* Permitimos que la columna se reduzca horizontalmente dentro de la fila sin desbordarse */
-  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Contenedor de dos columnas para los filtros por rango */
-/* .range-grid* y columnas asociadas eliminadas al volver a una sola columna de rangos */
+.card-body {
+  padding: 1.5rem;
+}
 
-/* Botones de acción */
-.button-group {
+/* Layout Utilities */
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.grid-2-cols-wide {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+}
+
+.flex-row {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 4px;
 }
 
-.button-group.compact button {
-  flex: 1;
+/* Sub-sections */
+.sub-section h3 {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-.button-group.vertical {
-  flex-direction: column;
+.helper-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
 }
 
-/* En la columna de salida los botones ocupan todo el ancho y están apilados */
-.output-col .button-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+/* Forms & Inputs */
+.form-group {
+  margin-bottom: 1rem;
 }
 
-.output-col .icon-button {
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+  color: var(--text-main);
+}
+
+.form-group.narrow {
+  max-width: 100px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+select {
   width: 100%;
-  justify-content: center;
-  flex: 1;
-  /* Hacemos que cada botón ocupe la altura disponible dentro del grupo */
-  height: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-/* La sección de formato del panel inferior ocupa todo el alto con sus botones */
-.config-col .button-group.vertical {
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Custom Select Wrapper */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  font-size: 0.7rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+select {
+  appearance: none;
+  background-color: transparent;
+}
+
+/* Toggles */
+.toggle-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  background-color: #f8fafc;
+  border-radius: var(--radius-md);
+}
+
+.toggle-group span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+input:checked+.slider {
+  background-color: var(--primary-color);
+}
+
+input:checked+.slider:before {
+  transform: translateX(20px);
+}
+
+/* Filter Chips */
+.filter-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.filter-chip:hover {
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+}
+
+.filter-icon {
+  font-size: 1.25rem;
+  background-color: #f1f5f9;
+  padding: 0.5rem;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.filter-info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
 }
 
-.config-col .button-group.vertical button {
-  flex: 1;
+.filter-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
 }
 
-.icon-button {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background-color: var(--secondary-color);
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 4px 6px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: background-color 0.2s ease;
-}
-
-.icon-button:hover {
-  background-color: #e5891f;
-}
-
-.secondary {
-  background-color: #e0e6f1;
+.filter-status {
+  font-size: 0.75rem;
   color: var(--primary-color);
-  padding: 4px 6px;
-  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.btn-icon {
+  background: none;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.secondary:hover {
-  background-color: #d5dceb;
-}
-
-.primary {
-  background-color: var(--secondary-color);
-  color: #fff;
-  padding: 4px 6px;
+  color: var(--text-muted);
   font-size: 0.75rem;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
-.primary:hover {
-  background-color: #e5891f;
+.filter-chip:hover .btn-icon {
+  opacity: 1;
 }
 
-.checkbox-row {
+/* Range Inputs */
+.range-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.range-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.range-group label {
   font-size: 0.8rem;
-  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.range-inputs {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.5rem;
 }
 
-.checkbox-row input {
-  margin-right: 2px;
+.input-sm {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
 }
 
-.hidden {
+.separator {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* Output Section */
+.printer-config {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.checkbox-label:hover input~.checkmark {
+  background-color: #f1f5f9;
+}
+
+.checkbox-label input:checked~.checkmark {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
   display: none;
 }
 
-/* Pie de página */
-.app-footer {
-  background-color: var(--primary-color);
-  color: #fff;
-  text-align: center;
-  padding: 8px;
-  font-size: 0.7rem;
-  margin-top: 8px;
+.checkbox-label input:checked~.checkmark:after {
+  display: block;
 }
 
-/* Modal (igual que antes) */
-#modal-overlay {
+.checkbox-label .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: white;
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px dashed var(--border-color);
+  color: var(--text-muted);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-text {
+  background: none;
+  color: var(--text-muted);
+}
+
+.btn-text:hover {
+  color: var(--text-main);
+  background-color: #f1f5f9;
+}
+
+/* Modal */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
   display: none;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Estilos de la ventana tipo Windows */
-.app-window {
-  width: 587px;
-  height: 548px;
-  margin: 20px auto;
-  background-color: var(--card-background);
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.modal-overlay.active {
+  opacity: 1;
+}
+
+.modal-container {
+  background-color: white;
+  width: 90%;
+  max-width: 700px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
 }
 
-/* Barra de título de la ventana */
-.window-title-bar {
-  height: 28px;
-  background-color: var(--primary-color);
-  color: #fff;
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+.modal-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 8px;
-  font-size: 0.85rem;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  user-select: none;
 }
 
-.window-title {
+.modal-header h3 {
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
-/* Controles de la ventana (minimizar, maximizar, cerrar) */
-.window-controls {
-  display: flex;
-  gap: 4px;
-  font-weight: 600;
-}
-
-.window-controls .control {
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: default;
-  border-radius: 2px;
-  transition: background-color 0.2s ease;
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
   line-height: 1;
-}
-
-.window-controls .control:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.window-controls .close:hover {
-  background-color: #d9534f;
-}
-
-/* Área de contenido de la ventana */
-.window-content {
-  flex: 1;
-  overflow: hidden;
-  padding: 4px;
-  display: flex;
-}
-
-/* Ajustar el contenedor principal al nuevo tamaño de la ventana */
-.window-card {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Ajustes de filas y columnas para ahorrar espacio */
-.row {
-  display: flex;
-  gap: 6px;
-}
-
-.row .col {
-  flex: 1;
-  background-color: var(--card-background);
-  border-radius: var(--border-radius);
-  /* Añadimos un borde más visible para diferenciar las secciones */
-  border: 1px solid #b5c0d8;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-/* Reducir alto del contenedor de rangos para que quepa en la ventana */
-.range-scroll {
-  /* Permitimos que la lista de rangos crezca para igualar la altura de los filtros selectivos.
-     El elemento padre (.range-col) gestionará la altura disponible. */
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  /* También permitimos que la lista se reduzca en anchura dentro de su contenedor */
-  min-width: 0;
-}
-
-/* Ajustes para tamaños de fuentes más pequeños en botones y textos */
-.row .col h2 {
-  color: var(--primary-color);
-  font-size: 0.8rem;
-  margin-bottom: 2px;
-}
-
-.field-row,
-.data-item,
-.filter-item,
-.range-item,
-.checkbox-row {
-  font-size: 0.75rem;
-}
-
-.icon-button {
-  font-size: 0.75rem;
-  padding: 2px 4px;
-}
-
-.secondary,
-.primary {
-  font-size: 0.7rem;
-  padding: 2px 4px;
-}
-
-.modal {
-  background: #fff;
-  padding: 12px;
-  border-radius: 6px;
-  width: 560px;
-  max-width: 90%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
 }
 
 .modal-body {
-  display: flex;
-  gap: 8px;
+  padding: 1.5rem;
 }
 
-.modal-list {
+.dual-list-box {
+  display: flex;
+  gap: 1rem;
+  height: 300px;
+}
+
+.list-column {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.modal-list h4 {
-  margin-bottom: 2px;
+.list-column h4 {
   font-size: 0.85rem;
-  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
 }
 
-.modal-list select {
+.list-wrapper {
   flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 2px;
-  font-size: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
-.modal-controls {
+.list-wrapper select {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0.5rem;
+}
+
+.list-wrapper select option {
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.list-wrapper select option:checked {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.list-controls {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   justify-content: center;
+  gap: 0.5rem;
 }
 
-.modal-controls button {
-  padding: 2px 6px;
-  font-size: 0.8rem;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--secondary-color);
-  color: #fff;
+.control-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
   cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: all 0.2s;
 }
 
-.modal-controls button:hover {
-  background-color: #e5891f;
+.control-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
 }
 
 .modal-options {
+  margin-top: 1rem;
   display: flex;
-  gap: 12px;
-  font-size: 0.75rem;
+  gap: 1.5rem;
 }
 
-.modal-options label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.modal-buttons {
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
   display: flex;
   justify-content: flex-end;
-  gap: 4px;
+  gap: 0.75rem;
+  background-color: #f8fafc;
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+  .grid-2-cols,
+  .grid-2-cols-wide {
+    grid-template-columns: 1fr;
+  }
+
+  .dual-list-box {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .list-controls {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .printer-config {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }

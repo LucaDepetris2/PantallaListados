@@ -1,82 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Listado de Comprobantes de Ventas</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Ventana al estilo Windows -->
-    <div class="app-window">
-      <div class="window-title-bar">
-        <span class="window-title">Listado de Comprobantes de Ventas</span>
-        <div class="window-controls">
-          <span class="control minimize" title="Minimizar">−</span>
-          <span class="control maximize" title="Maximizar">□</span>
-          <span class="control close" title="Cerrar">×</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Listado de Comprobantes de Ventas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Listado de Comprobantes de Ventas</h1>
+      <p class="subtitle">Configuración y emisión de reportes</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Section: Configuration (Formato & Datos) -->
+      <section class="card config-section">
+        <div class="card-header">
+          <h2><span class="icon">⚙️</span> Configuración General</h2>
         </div>
-      </div>
-      <div class="window-content">
-        <!-- Contenido principal -->
-        <div class="window-card">
-          <!-- Primera fila: Formato y Datos -->
-          <div class="row row1">
-            <!-- Columna Formato -->
-            <div class="col format-col">
-              <h2>Formato</h2>
-              <div class="field-row">
-                <label for="titulo">Título</label>
+        <div class="card-body grid-2-cols">
+          <!-- Formato -->
+          <div class="sub-section">
+            <h3>Formato</h3>
+            <div class="form-group">
+              <label for="titulo">Título del Reporte</label>
+              <div class="select-wrapper">
                 <select id="titulo">
                   <option value="fc-rto-nc-nd">LISTADOS FC - RTO - N/C - N/D</option>
                   <option value="fc-rto-nc">LISTADOS FC - RTO - N/C</option>
                   <option value="fc-nc-nd">LISTADOS FC - N/C - N/D</option>
                 </select>
               </div>
-              <div class="field-row">
-                <label for="orden">Orden</label>
+            </div>
+            <div class="form-group">
+              <label for="orden">Ordenamiento</label>
+              <div class="select-wrapper">
                 <select id="orden">
-                  <option value="razon-social">Razón social</option>
+                  <option value="razon-social">Razón Social</option>
                   <option value="fecha">Fecha</option>
                   <option value="numero">Número</option>
                 </select>
               </div>
-              <div class="field-row">
-                <label for="formato">Formato</label>
-                <input type="number" id="formato" min="1" max="5" value="1" />
-              </div>
             </div>
-            <!-- Columna Datos -->
-            <div class="col data-col">
-              <h2>Datos</h2>
-              <div class="data-item">
-                <span>Solo anulados</span>
-                <div class="input-group">
-                  <input type="radio" id="anulados-no" name="solo-anulados" value="no" checked />
-                  <label for="anulados-no">No</label>
-                  <input type="radio" id="anulados-si" name="solo-anulados" value="si" />
-                  <label for="anulados-si">Sí</label>
-                </div>
-              </div>
-              <div class="data-item">
-                <span>Cotización histórica</span>
-                <div class="input-group">
-                  <input type="radio" id="coth-no" name="cot-historica" value="no" />
-                  <label for="coth-no">No</label>
-                  <input type="radio" id="coth-si" name="cot-historica" value="si" checked />
-                  <label for="coth-si">Sí</label>
-                </div>
-              </div>
-              <div class="data-item">
-                <span>Moneda presentación</span>
+            <div class="form-group">
+              <label for="formato">Formato Visual</label>
+              <input type="number" id="formato" min="1" max="5" value="1" class="input-number" />
+            </div>
+          </div>
+
+          <!-- Datos -->
+          <div class="sub-section">
+            <h3>Opciones de Datos</h3>
+            <div class="toggle-group">
+              <span>Solo anulados</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="solo-anulados">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toggle-group">
+              <span>Cotización histórica</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="cot-historica" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="moneda-presentacion">Moneda</label>
+              <div class="select-wrapper">
                 <select id="moneda-presentacion">
-                  <option value="pesos">Pesos</option>
-                  <option value="dolares">Dólares</option>
-                  <option value="euros">Euros</option>
+                  <option value="pesos">Pesos ($)</option>
+                  <option value="dolares">Dólares (US$)</option>
+                  <option value="euros">Euros (€)</option>
                 </select>
               </div>
-              <div class="data-item">
-                <span>Solo pendientes a de</span>
+            </div>
+            <div class="form-group">
+              <label for="solo-pendientes">Pendientes</label>
+              <div class="select-wrapper">
                 <select id="solo-pendientes">
                   <option value="no">No</option>
                   <option value="si">Sí</option>
@@ -84,178 +91,233 @@
               </div>
             </div>
           </div>
-          <!-- Segunda fila: Filtros Selectivos y Filtros por Rango -->
-          <div class="row row2">
-            <!-- Filtros Selectivos -->
-            <div class="col selective-col">
-              <h2>Filtros Selectivos</h2>
-              <div class="filter-item">
-                <span class="emoji" title="Zonas">🌍</span>
-                <span>Zonas</span>
-                <span id="zonas-summary" class="selection-summary">Todas</span>
-                <button class="mini-button secondary" data-filter="zonas">Seleccionar</button>
+        </div>
+      </section>
+
+      <!-- Section: Filters (Selectivos & Rangos) -->
+      <section class="card filters-section">
+        <div class="card-header">
+          <h2><span class="icon">🔍</span> Filtros de Búsqueda</h2>
+        </div>
+        <div class="card-body grid-2-cols-wide">
+          <!-- Filtros Selectivos -->
+          <div class="sub-section">
+            <h3>Filtros Selectivos</h3>
+            <p class="helper-text">Seleccione los ítems específicos a incluir.</p>
+            <div class="filter-list">
+              <div class="filter-chip" data-filter="zonas">
+                <span class="filter-icon">🌍</span>
+                <div class="filter-info">
+                  <span class="filter-name">Zonas</span>
+                  <span id="zonas-summary" class="filter-status">Todas</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
-              <div class="filter-item">
-                <span class="emoji" title="Comprobantes">📄</span>
-                <span>Comprobantes</span>
-                <span id="comprobantes-summary" class="selection-summary">Todos</span>
-                <button class="mini-button secondary" data-filter="comprobantes">Seleccionar</button>
+              <div class="filter-chip" data-filter="comprobantes">
+                <span class="filter-icon">📄</span>
+                <div class="filter-info">
+                  <span class="filter-name">Comprobantes</span>
+                  <span id="comprobantes-summary" class="filter-status">Todos</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
-              <div class="filter-item">
-                <span class="emoji" title="Vendedores">🧑‍💼</span>
-                <span>Vendedores</span>
-                <span id="vendedores-summary" class="selection-summary">Todos</span>
-                <button class="mini-button secondary" data-filter="vendedores">Seleccionar</button>
+              <div class="filter-chip" data-filter="vendedores">
+                <span class="filter-icon">🧑‍💼</span>
+                <div class="filter-info">
+                  <span class="filter-name">Vendedores</span>
+                  <span id="vendedores-summary" class="filter-status">Todos</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
-              <div class="filter-item">
-                <span class="emoji" title="Clientes">👥</span>
-                <span>Clientes</span>
-                <span id="clientes-summary" class="selection-summary">Todos</span>
-                <button class="mini-button secondary" data-filter="clientes">Seleccionar</button>
+              <div class="filter-chip" data-filter="clientes">
+                <span class="filter-icon">👥</span>
+                <div class="filter-info">
+                  <span class="filter-name">Clientes</span>
+                  <span id="clientes-summary" class="filter-status">Todos</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
-              <div class="filter-item">
-                <span class="emoji" title="Sucursales">🏢</span>
-                <span>Sucursales</span>
-                <span id="sucursales-summary" class="selection-summary">Todas</span>
-                <button class="mini-button secondary" data-filter="sucursales">Seleccionar</button>
+              <div class="filter-chip" data-filter="sucursales">
+                <span class="filter-icon">🏢</span>
+                <div class="filter-info">
+                  <span class="filter-name">Sucursales</span>
+                  <span id="sucursales-summary" class="filter-status">Todas</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
-              <div class="filter-item">
-                <span class="emoji" title="Condiciones de pago">💳</span>
-                <span>Condiciones de pago</span>
-                <span id="condiciones-summary" class="selection-summary">Todas</span>
-                <button class="mini-button secondary" data-filter="condiciones">Seleccionar</button>
+              <div class="filter-chip" data-filter="condiciones">
+                <span class="filter-icon">💳</span>
+                <div class="filter-info">
+                  <span class="filter-name">Condiciones</span>
+                  <span id="condiciones-summary" class="filter-status">Todas</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
-              <div class="filter-item">
-                <span class="emoji" title="Categorías">🗂</span>
-                <span>Categorías</span>
-                <span id="categorias-summary" class="selection-summary">Todas</span>
-                <button class="mini-button secondary" data-filter="categorias">Seleccionar</button>
+              <div class="filter-chip" data-filter="categorias">
+                <span class="filter-icon">🗂</span>
+                <div class="filter-info">
+                  <span class="filter-name">Categorías</span>
+                  <span id="categorias-summary" class="filter-status">Todas</span>
+                </div>
+                <button class="btn-icon">Edit</button>
               </div>
             </div>
-            <!-- Filtros por Rango -->
-            <div class="col range-col">
-              <h2>Filtros por Rango</h2>
-              <div class="range-scroll">
-                <div class="range-item">
-                  <span>Clientes</span>
-                  <input type="text" placeholder="Primero" value="0001" />
-                  <input type="text" placeholder="Último" value="9999" />
+          </div>
+
+          <!-- Filtros por Rango -->
+          <div class="sub-section">
+            <h3>Filtros por Rango</h3>
+            <p class="helper-text">Defina los rangos de valores.</p>
+            <div class="range-grid">
+              <div class="range-group">
+                <label>Clientes</label>
+                <div class="range-inputs">
+                  <input type="text" placeholder="Desde" value="0001" class="input-sm">
+                  <span class="separator">→</span>
+                  <input type="text" placeholder="Hasta" value="9999" class="input-sm">
                 </div>
-                <div class="range-item">
-                  <span>Fechas</span>
-                  <input type="date" value="2025-01-01" />
-                  <input type="date" value="2025-12-31" />
+              </div>
+              <div class="range-group">
+                <label>Fechas</label>
+                <div class="range-inputs">
+                  <input type="date" value="2025-01-01" class="input-sm">
+                  <span class="separator">→</span>
+                  <input type="date" value="2025-12-31" class="input-sm">
                 </div>
-                <div class="range-item">
-                  <span>Bonificación 1</span>
-                  <input type="number" min="0" max="100" value="0" />
-                  <input type="number" min="0" max="100" value="100" />
+              </div>
+              <div class="range-group">
+                <label>Bonificación 1</label>
+                <div class="range-inputs">
+                  <input type="number" value="0" class="input-sm">
+                  <span class="separator">→</span>
+                  <input type="number" value="100" class="input-sm">
                 </div>
-                <div class="range-item">
-                  <span>Bonificación 2</span>
-                  <input type="number" min="0" max="100" value="0" />
-                  <input type="number" min="0" max="100" value="100" />
+              </div>
+              <div class="range-group">
+                <label>Bonificación 2</label>
+                <div class="range-inputs">
+                  <input type="number" value="0" class="input-sm">
+                  <span class="separator">→</span>
+                  <input type="number" value="100" class="input-sm">
                 </div>
-                <div class="range-item">
-                  <span>Fecha Proceso</span>
-                  <input type="date" value="2025-01-01" />
-                  <input type="date" value="2025-12-31" />
+              </div>
+              <div class="range-group">
+                <label>Fecha Proceso</label>
+                <div class="range-inputs">
+                  <input type="date" value="2025-01-01" class="input-sm">
+                  <span class="separator">→</span>
+                  <input type="date" value="2025-12-31" class="input-sm">
                 </div>
-                <div class="range-item">
-                  <span>Categorías</span>
-                  <input type="text" placeholder="Primero" value="A" />
-                  <input type="text" placeholder="Último" value="Z" />
+              </div>
+              <div class="range-group">
+                <label>Categorías</label>
+                <div class="range-inputs">
+                  <input type="text" placeholder="A" value="A" class="input-sm">
+                  <span class="separator">→</span>
+                  <input type="text" placeholder="Z" value="Z" class="input-sm">
                 </div>
               </div>
             </div>
           </div>
-          <!-- Tercera fila: Salida, Impresora y Configuración -->
-          <div class="row row3">
-            <!-- Seleccionar Salida -->
-            <div class="col output-col">
-              <h2>Salida</h2>
-              <div class="button-group">
-                <button class="icon-button" id="preview-button" title="Vista previa">🖥 <span>Vista previa</span></button>
-                <button class="icon-button" id="pdf-button" title="Imprimir o PDF">🖨 <span>PDF/Impresora</span></button>
-                <button class="icon-button" id="install-button" title="Instalar complementos">📦 <span>Instalar</span></button>
-              </div>
-            </div>
-            <!-- Seleccionar Impresora -->
-            <div class="col printer-col">
-              <h2>Impresora</h2>
-              <div class="field-row">
-                <label for="printer">Dispositivo</label>
+        </div>
+      </section>
+
+      <!-- Section: Output & Actions -->
+      <section class="card output-section">
+        <div class="card-body flex-row">
+          <div class="printer-config">
+            <div class="form-group">
+              <label for="printer">Impresora</label>
+              <div class="select-wrapper">
                 <select id="printer">
                   <option value="microsoft-print">Microsoft Print to PDF</option>
                   <option value="hp-laserjet">HP LaserJet Pro</option>
-                  <option value="epson">Epson EcoTank</option>
                 </select>
               </div>
-              <div class="field-row">
-                <label for="copies">Copias</label>
-                <input type="number" id="copies" min="1" max="10" value="1" />
-              </div>
-              <div class="checkbox-row">
-                <label><input type="checkbox" id="separator-checkbox" checked /> Sep. miles</label>
-              </div>
-              <div class="checkbox-row">
-                <label><input type="checkbox" id="send-email" /> Enviar por email</label>
-              </div>
-              <div class="field-row hidden" id="email-container">
-                <label for="email">Correo</label>
-                <input type="email" id="email" placeholder="usuario@dominio.com" />
-              </div>
-              <div class="button-group compact">
-                <button class="secondary" id="configure-printer-button">Config.</button>
-                <button class="primary" id="print-button">Imprimir</button>
-              </div>
             </div>
-            <!-- Configuración de Formato -->
-            <div class="col config-col">
-              <h2>Formato</h2>
-              <div class="button-group vertical">
-                <button class="secondary" id="reporte-button">Reporte...</button>
-                <button class="secondary" id="columnas-button">Columnas...</button>
-                <button class="secondary" id="preliminar-button">Preliminar...</button>
-              </div>
+            <div class="form-group narrow">
+              <label for="copies">Copias</label>
+              <input type="number" id="copies" min="1" value="1" class="input-number">
             </div>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="separator-checkbox" checked>
+                <span class="checkmark"></span>
+                Sep. miles
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="send-email">
+                <span class="checkmark"></span>
+                Enviar Email
+              </label>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-secondary" id="preview-button">
+              <span class="icon">🖥</span> Vista Previa
+            </button>
+            <button class="btn btn-primary" id="print-button">
+              <span class="icon">🖨</span> Imprimir
+            </button>
+            <button class="btn btn-outline" id="install-button">
+              <span class="icon">📦</span> Instalar
+            </button>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
+  </div>
 
-    <!-- Modal para selección múltiple -->
-    <div id="modal-overlay">
-      <div class="modal" id="modal-content">
-        <h3 id="modal-title">Seleccionar</h3>
-        <div class="modal-body">
-          <div class="modal-list">
-            <h4>Datos disponibles</h4>
-            <select id="available-list" multiple size="8"></select>
+  <!-- Modern Modal -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="modal-title">Seleccionar Ítems</h3>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="dual-list-box">
+          <div class="list-column">
+            <h4>Disponibles</h4>
+            <div class="list-wrapper">
+              <select id="available-list" multiple></select>
+            </div>
           </div>
-          <div class="modal-controls">
-            <button id="add-selected">&gt;</button>
-            <button id="remove-selected">&lt;</button>
-            <button id="add-all">&gt;&gt;</button>
-            <button id="remove-all">&lt;&lt;</button>
+          <div class="list-controls">
+            <button id="add-selected" class="control-btn" title="Agregar seleccionados">&rsaquo;</button>
+            <button id="remove-selected" class="control-btn" title="Quitar seleccionados">&lsaquo;</button>
+            <button id="add-all" class="control-btn" title="Agregar todos">&raquo;</button>
+            <button id="remove-all" class="control-btn" title="Quitar todos">&laquo;</button>
           </div>
-          <div class="modal-list">
-            <h4>Datos seleccionados</h4>
-            <select id="selected-list" multiple size="8"></select>
+          <div class="list-column">
+            <h4>Seleccionados</h4>
+            <div class="list-wrapper">
+              <select id="selected-list" multiple></select>
+            </div>
           </div>
         </div>
         <div class="modal-options">
-          <label><input type="checkbox" id="guardar-seleccion" /> Guarda selección</label>
-          <label><input type="checkbox" id="todos-formatos" /> Todos los formatos</label>
-        </div>
-        <div class="modal-buttons">
-          <button id="modal-aceptar" class="primary">Aceptar</button>
-          <button id="modal-cancelar" class="secondary">Cancelar</button>
+          <label class="checkbox-label">
+            <input type="checkbox" id="guardar-seleccion">
+            <span class="checkmark"></span>
+            Guardar selección
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="todos-formatos">
+            <span class="checkmark"></span>
+            Todos los formatos
+          </label>
         </div>
       </div>
+      <div class="modal-footer">
+        <button id="modal-cancelar" class="btn btn-text">Cancelar</button>
+        <button id="modal-aceptar" class="btn btn-primary">Confirmar</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Script principal -->
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
+
 </html>
