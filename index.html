@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Listado de Comprobantes de Ventas</title>
+  <title>Listado de Comprobantes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,33 +13,38 @@
 
 <body>
   <div class="app-container">
+    <!-- Compact Header -->
     <header class="app-header">
-      <h1>Listado de Comprobantes de Ventas</h1>
-      <p class="subtitle">Configuración y emisión de reportes</p>
+      <div class="header-content">
+        <h1>Listado de Comprobantes</h1>
+        <span class="badge">Ventas</span>
+      </div>
+      <div class="header-actions">
+        <!-- Moved printer config here for space saving or keep in footer? Let's keep footer for actions, maybe printer here? No, footer is standard. -->
+      </div>
     </header>
 
-    <main class="main-content">
-      <!-- Section: Configuration (Formato & Datos) -->
-      <section class="card config-section">
-        <div class="card-header">
-          <h2><span class="icon">⚙️</span> Configuración General</h2>
+    <main class="main-grid">
+      <!-- Column 1: Config & Data -->
+      <section class="panel config-panel">
+        <div class="panel-header">
+          <h2><span class="icon">⚙️</span> Configuración</h2>
         </div>
-        <div class="card-body grid-2-cols">
-          <!-- Formato -->
-          <div class="sub-section">
-            <h3>Formato</h3>
-            <div class="form-group">
-              <label for="titulo">Título del Reporte</label>
-              <div class="select-wrapper">
-                <select id="titulo">
-                  <option value="fc-rto-nc-nd">LISTADOS FC - RTO - N/C - N/D</option>
-                  <option value="fc-rto-nc">LISTADOS FC - RTO - N/C</option>
-                  <option value="fc-nc-nd">LISTADOS FC - N/C - N/D</option>
-                </select>
-              </div>
+        <div class="panel-body">
+          <div class="form-group compact">
+            <label for="titulo">Título</label>
+            <div class="select-wrapper">
+              <select id="titulo">
+                <option value="fc-rto-nc-nd">FC - RTO - N/C - N/D</option>
+                <option value="fc-rto-nc">FC - RTO - N/C</option>
+                <option value="fc-nc-nd">FC - N/C - N/D</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="orden">Ordenamiento</label>
+          </div>
+
+          <div class="row-group">
+            <div class="form-group compact">
+              <label for="orden">Orden</label>
               <div class="select-wrapper">
                 <select id="orden">
                   <option value="razon-social">Razón Social</option>
@@ -48,232 +53,217 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label for="formato">Formato Visual</label>
-              <input type="number" id="formato" min="1" max="5" value="1" class="input-number" />
+            <div class="form-group compact narrow">
+              <label for="formato">Fmt</label>
+              <input type="number" id="formato" min="1" max="5" value="1" />
             </div>
           </div>
 
-          <!-- Datos -->
-          <div class="sub-section">
-            <h3>Opciones de Datos</h3>
-            <div class="toggle-group">
+          <div class="divider"></div>
+
+          <div class="form-group compact">
+            <label for="moneda-presentacion">Moneda</label>
+            <div class="select-wrapper">
+              <select id="moneda-presentacion">
+                <option value="pesos">Pesos ($)</option>
+                <option value="dolares">Dólares (US$)</option>
+                <option value="euros">Euros (€)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group compact">
+            <label for="solo-pendientes">Pendientes</label>
+            <div class="select-wrapper">
+              <select id="solo-pendientes">
+                <option value="no">No</option>
+                <option value="si">Sí</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="toggles-container">
+            <label class="toggle-row">
               <span>Solo anulados</span>
-              <label class="toggle-switch">
-                <input type="checkbox" id="solo-anulados">
-                <span class="slider"></span>
-              </label>
-            </div>
-            <div class="toggle-group">
-              <span>Cotización histórica</span>
-              <label class="toggle-switch">
-                <input type="checkbox" id="cot-historica" checked>
-                <span class="slider"></span>
-              </label>
-            </div>
-            <div class="form-group">
-              <label for="moneda-presentacion">Moneda</label>
-              <div class="select-wrapper">
-                <select id="moneda-presentacion">
-                  <option value="pesos">Pesos ($)</option>
-                  <option value="dolares">Dólares (US$)</option>
-                  <option value="euros">Euros (€)</option>
-                </select>
+              <input type="checkbox" id="solo-anulados">
+              <span class="toggle-skin"></span>
+            </label>
+            <label class="toggle-row">
+              <span>Cotiz. hist.</span>
+              <input type="checkbox" id="cot-historica" checked>
+              <span class="toggle-skin"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Column 2: Selective Filters -->
+      <section class="panel filters-panel">
+        <div class="panel-header">
+          <h2><span class="icon">🔍</span> Filtros</h2>
+        </div>
+        <div class="panel-body no-padding">
+          <div class="filter-list-compact">
+            <div class="filter-item" data-filter="zonas">
+              <span class="f-icon">🌍</span>
+              <div class="f-info">
+                <span class="f-name">Zonas</span>
+                <span id="zonas-summary" class="f-status">Todas</span>
               </div>
+              <span class="f-arrow">›</span>
             </div>
-            <div class="form-group">
-              <label for="solo-pendientes">Pendientes</label>
-              <div class="select-wrapper">
-                <select id="solo-pendientes">
-                  <option value="no">No</option>
-                  <option value="si">Sí</option>
-                </select>
+            <div class="filter-item" data-filter="comprobantes">
+              <span class="f-icon">📄</span>
+              <div class="f-info">
+                <span class="f-name">Comprobantes</span>
+                <span id="comprobantes-summary" class="f-status">Todos</span>
               </div>
+              <span class="f-arrow">›</span>
+            </div>
+            <div class="filter-item" data-filter="vendedores">
+              <span class="f-icon">🧑‍💼</span>
+              <div class="f-info">
+                <span class="f-name">Vendedores</span>
+                <span id="vendedores-summary" class="f-status">Todos</span>
+              </div>
+              <span class="f-arrow">›</span>
+            </div>
+            <div class="filter-item" data-filter="clientes">
+              <span class="f-icon">👥</span>
+              <div class="f-info">
+                <span class="f-name">Clientes</span>
+                <span id="clientes-summary" class="f-status">Todos</span>
+              </div>
+              <span class="f-arrow">›</span>
+            </div>
+            <div class="filter-item" data-filter="sucursales">
+              <span class="f-icon">🏢</span>
+              <div class="f-info">
+                <span class="f-name">Sucursales</span>
+                <span id="sucursales-summary" class="f-status">Todas</span>
+              </div>
+              <span class="f-arrow">›</span>
+            </div>
+            <div class="filter-item" data-filter="condiciones">
+              <span class="f-icon">💳</span>
+              <div class="f-info">
+                <span class="f-name">Condiciones</span>
+                <span id="condiciones-summary" class="f-status">Todas</span>
+              </div>
+              <span class="f-arrow">›</span>
+            </div>
+            <div class="filter-item" data-filter="categorias">
+              <span class="f-icon">🗂</span>
+              <div class="f-info">
+                <span class="f-name">Categorías</span>
+                <span id="categorias-summary" class="f-status">Todas</span>
+              </div>
+              <span class="f-arrow">›</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Section: Filters (Selectivos & Rangos) -->
-      <section class="card filters-section">
-        <div class="card-header">
-          <h2><span class="icon">🔍</span> Filtros de Búsqueda</h2>
+      <!-- Column 3: Range Filters -->
+      <section class="panel ranges-panel">
+        <div class="panel-header">
+          <h2><span class="icon">📏</span> Rangos</h2>
         </div>
-        <div class="card-body grid-2-cols-wide">
-          <!-- Filtros Selectivos -->
-          <div class="sub-section">
-            <h3>Filtros Selectivos</h3>
-            <p class="helper-text">Seleccione los ítems específicos a incluir.</p>
-            <div class="filter-list">
-              <div class="filter-chip" data-filter="zonas">
-                <span class="filter-icon">🌍</span>
-                <div class="filter-info">
-                  <span class="filter-name">Zonas</span>
-                  <span id="zonas-summary" class="filter-status">Todas</span>
-                </div>
-                <button class="btn-icon">Edit</button>
-              </div>
-              <div class="filter-chip" data-filter="comprobantes">
-                <span class="filter-icon">📄</span>
-                <div class="filter-info">
-                  <span class="filter-name">Comprobantes</span>
-                  <span id="comprobantes-summary" class="filter-status">Todos</span>
-                </div>
-                <button class="btn-icon">Edit</button>
-              </div>
-              <div class="filter-chip" data-filter="vendedores">
-                <span class="filter-icon">🧑‍💼</span>
-                <div class="filter-info">
-                  <span class="filter-name">Vendedores</span>
-                  <span id="vendedores-summary" class="filter-status">Todos</span>
-                </div>
-                <button class="btn-icon">Edit</button>
-              </div>
-              <div class="filter-chip" data-filter="clientes">
-                <span class="filter-icon">👥</span>
-                <div class="filter-info">
-                  <span class="filter-name">Clientes</span>
-                  <span id="clientes-summary" class="filter-status">Todos</span>
-                </div>
-                <button class="btn-icon">Edit</button>
-              </div>
-              <div class="filter-chip" data-filter="sucursales">
-                <span class="filter-icon">🏢</span>
-                <div class="filter-info">
-                  <span class="filter-name">Sucursales</span>
-                  <span id="sucursales-summary" class="filter-status">Todas</span>
-                </div>
-                <button class="btn-icon">Edit</button>
-              </div>
-              <div class="filter-chip" data-filter="condiciones">
-                <span class="filter-icon">💳</span>
-                <div class="filter-info">
-                  <span class="filter-name">Condiciones</span>
-                  <span id="condiciones-summary" class="filter-status">Todas</span>
-                </div>
-                <button class="btn-icon">Edit</button>
-              </div>
-              <div class="filter-chip" data-filter="categorias">
-                <span class="filter-icon">🗂</span>
-                <div class="filter-info">
-                  <span class="filter-name">Categorías</span>
-                  <span id="categorias-summary" class="filter-status">Todas</span>
-                </div>
-                <button class="btn-icon">Edit</button>
+        <div class="panel-body">
+          <div class="range-list">
+            <div class="range-item">
+              <label>Clientes</label>
+              <div class="inputs">
+                <input type="text" value="0001" class="mini-input">
+                <span>-</span>
+                <input type="text" value="9999" class="mini-input">
               </div>
             </div>
-          </div>
-
-          <!-- Filtros por Rango -->
-          <div class="sub-section">
-            <h3>Filtros por Rango</h3>
-            <p class="helper-text">Defina los rangos de valores.</p>
-            <div class="range-grid">
-              <div class="range-group">
-                <label>Clientes</label>
-                <div class="range-inputs">
-                  <input type="text" placeholder="Desde" value="0001" class="input-sm">
-                  <span class="separator">→</span>
-                  <input type="text" placeholder="Hasta" value="9999" class="input-sm">
-                </div>
-              </div>
-              <div class="range-group">
-                <label>Fechas</label>
-                <div class="range-inputs">
-                  <input type="date" value="2025-01-01" class="input-sm">
-                  <span class="separator">→</span>
-                  <input type="date" value="2025-12-31" class="input-sm">
-                </div>
-              </div>
-              <div class="range-group">
-                <label>Bonificación 1</label>
-                <div class="range-inputs">
-                  <input type="number" value="0" class="input-sm">
-                  <span class="separator">→</span>
-                  <input type="number" value="100" class="input-sm">
-                </div>
-              </div>
-              <div class="range-group">
-                <label>Bonificación 2</label>
-                <div class="range-inputs">
-                  <input type="number" value="0" class="input-sm">
-                  <span class="separator">→</span>
-                  <input type="number" value="100" class="input-sm">
-                </div>
-              </div>
-              <div class="range-group">
-                <label>Fecha Proceso</label>
-                <div class="range-inputs">
-                  <input type="date" value="2025-01-01" class="input-sm">
-                  <span class="separator">→</span>
-                  <input type="date" value="2025-12-31" class="input-sm">
-                </div>
-              </div>
-              <div class="range-group">
-                <label>Categorías</label>
-                <div class="range-inputs">
-                  <input type="text" placeholder="A" value="A" class="input-sm">
-                  <span class="separator">→</span>
-                  <input type="text" placeholder="Z" value="Z" class="input-sm">
-                </div>
+            <div class="range-item">
+              <label>Fechas</label>
+              <div class="inputs">
+                <input type="date" value="2025-01-01" class="mini-input date">
+                <span>-</span>
+                <input type="date" value="2025-12-31" class="mini-input date">
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section: Output & Actions -->
-      <section class="card output-section">
-        <div class="card-body flex-row">
-          <div class="printer-config">
-            <div class="form-group">
-              <label for="printer">Impresora</label>
-              <div class="select-wrapper">
-                <select id="printer">
-                  <option value="microsoft-print">Microsoft Print to PDF</option>
-                  <option value="hp-laserjet">HP LaserJet Pro</option>
-                </select>
+            <div class="range-item">
+              <label>Bonif. 1</label>
+              <div class="inputs">
+                <input type="number" value="0" class="mini-input">
+                <span>-</span>
+                <input type="number" value="100" class="mini-input">
               </div>
             </div>
-            <div class="form-group narrow">
-              <label for="copies">Copias</label>
-              <input type="number" id="copies" min="1" value="1" class="input-number">
+            <div class="range-item">
+              <label>Bonif. 2</label>
+              <div class="inputs">
+                <input type="number" value="0" class="mini-input">
+                <span>-</span>
+                <input type="number" value="100" class="mini-input">
+              </div>
             </div>
-            <div class="checkbox-group">
-              <label class="checkbox-label">
-                <input type="checkbox" id="separator-checkbox" checked>
-                <span class="checkmark"></span>
-                Sep. miles
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" id="send-email">
-                <span class="checkmark"></span>
-                Enviar Email
-              </label>
+            <div class="range-item">
+              <label>F. Proceso</label>
+              <div class="inputs">
+                <input type="date" value="2025-01-01" class="mini-input date">
+                <span>-</span>
+                <input type="date" value="2025-12-31" class="mini-input date">
+              </div>
             </div>
-          </div>
-
-          <div class="action-buttons">
-            <button class="btn btn-secondary" id="preview-button">
-              <span class="icon">🖥</span> Vista Previa
-            </button>
-            <button class="btn btn-primary" id="print-button">
-              <span class="icon">🖨</span> Imprimir
-            </button>
-            <button class="btn btn-outline" id="install-button">
-              <span class="icon">📦</span> Instalar
-            </button>
+            <div class="range-item">
+              <label>Categorías</label>
+              <div class="inputs">
+                <input type="text" value="A" class="mini-input">
+                <span>-</span>
+                <input type="text" value="Z" class="mini-input">
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </main>
+
+    <!-- Compact Footer -->
+    <footer class="app-footer">
+      <div class="printer-settings">
+        <div class="select-wrapper printer-select">
+          <select id="printer">
+            <option value="microsoft-print">Microsoft Print to PDF</option>
+            <option value="hp-laserjet">HP LaserJet Pro</option>
+          </select>
+        </div>
+        <div class="copies-wrapper">
+          <label>Copias</label>
+          <input type="number" id="copies" min="1" value="1">
+        </div>
+        <label class="checkbox-simple">
+          <input type="checkbox" id="separator-checkbox" checked> Sep. miles
+        </label>
+        <label class="checkbox-simple">
+          <input type="checkbox" id="send-email"> Email
+        </label>
+      </div>
+
+      <div class="footer-actions">
+        <button class="btn-icon-text" id="preview-button">
+          <span class="icon">🖥</span>
+        </button>
+        <button class="btn-primary" id="print-button">
+          IMPRIMIR
+        </button>
+        <button class="btn-icon-text" id="install-button">
+          <span class="icon">📦</span>
+        </button>
+      </div>
+    </footer>
   </div>
 
-  <!-- Modern Modal -->
+  <!-- Modern Modal (Compact) -->
   <div id="modal-overlay" class="modal-overlay">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 id="modal-title">Seleccionar Ítems</h3>
+        <h3 id="modal-title">Seleccionar</h3>
         <button class="modal-close" id="modal-close-btn">&times;</button>
       </div>
       <div class="modal-body">
@@ -285,10 +275,10 @@
             </div>
           </div>
           <div class="list-controls">
-            <button id="add-selected" class="control-btn" title="Agregar seleccionados">&rsaquo;</button>
-            <button id="remove-selected" class="control-btn" title="Quitar seleccionados">&lsaquo;</button>
-            <button id="add-all" class="control-btn" title="Agregar todos">&raquo;</button>
-            <button id="remove-all" class="control-btn" title="Quitar todos">&laquo;</button>
+            <button id="add-selected" class="control-btn">&rsaquo;</button>
+            <button id="remove-selected" class="control-btn">&lsaquo;</button>
+            <button id="add-all" class="control-btn">&raquo;</button>
+            <button id="remove-all" class="control-btn">&laquo;</button>
           </div>
           <div class="list-column">
             <h4>Seleccionados</h4>
@@ -298,21 +288,17 @@
           </div>
         </div>
         <div class="modal-options">
-          <label class="checkbox-label">
-            <input type="checkbox" id="guardar-seleccion">
-            <span class="checkmark"></span>
-            Guardar selección
+          <label class="checkbox-simple">
+            <input type="checkbox" id="guardar-seleccion"> Guardar
           </label>
-          <label class="checkbox-label">
-            <input type="checkbox" id="todos-formatos">
-            <span class="checkmark"></span>
-            Todos los formatos
+          <label class="checkbox-simple">
+            <input type="checkbox" id="todos-formatos"> Todos fmt.
           </label>
         </div>
       </div>
       <div class="modal-footer">
-        <button id="modal-cancelar" class="btn btn-text">Cancelar</button>
-        <button id="modal-aceptar" class="btn btn-primary">Confirmar</button>
+        <button id="modal-cancelar" class="btn-text">Cancelar</button>
+        <button id="modal-aceptar" class="btn-primary-sm">Aceptar</button>
       </div>
     </div>
   </div>

@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // State
   const selectedFilters = {};
-  
+
   // Initialize all selected by default
   Object.keys(filterData).forEach((key) => {
     selectedFilters[key] = filterData[key].map((item) => item.codigo);
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(filter) {
     currentFilter = filter;
     modalTitle.textContent = `Seleccionar ${capitalize(filter)}`;
-    
+
     // Clear lists
     availableList.innerHTML = '';
     selectedListElem.innerHTML = '';
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const option = document.createElement('option');
       option.value = item.codigo;
       option.text = `${item.descripcion} (${item.codigo})`;
-      
+
       if (selectedFilters[filter].includes(item.codigo)) {
         selectedListElem.add(option);
       } else {
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Event Delegation for Filter Chips ---
-  document.querySelectorAll('.filter-chip').forEach((chip) => {
+  document.querySelectorAll('.filter-item').forEach((chip) => {
     chip.addEventListener('click', () => {
       const filter = chip.getAttribute('data-filter');
       openModal(filter);
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('🖥 Generando vista previa del reporte...');
     });
   }
-  
+
   if (installButton) {
     installButton.addEventListener('click', () => {
       alert('📦 Buscando complementos disponibles...');
